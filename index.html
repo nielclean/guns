@@ -2,29 +2,34 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>guns.lol clone</title>
-  <link rel="stylesheet" href="style.css"/>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&display=swap" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>@username</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
 </head>
 <body>
-  <div id="particles-js"></div>
+  <canvas id="stars"></canvas>
 
-  <div class="container" id="card">
-    <img src="images/avatar.png" alt="Avatar" class="avatar" id="avatar">
-    <h1 id="username">@carregando</h1>
-    <p id="status">Status: ...</p>
-
-    <div class="links">
-      <a href="https://discord.com/users/1355225924018245796" target="_blank">Discord</a>
-      <a href="https://tiktok.com/@seuuser" target="_blank">TikTok</a>
-      <a href="https://instagram.com/seuuser" target="_blank">Instagram</a>
-    </div>
-
-    <p class="views">👁️ Visualizações: <span id="viewCount">0</span></p>
+  <div class="view-counter">
+    👁️ <span id="viewCount">0</span>
   </div>
 
-  <script src="libs/particles.min.js"></script>
+  <div class="profile">
+    <img id="avatar" class="avatar" src="images/avatar.png" alt="avatar" />
+    <div class="username">@username</div>
+
+    <div class="badges">
+      <img src="icons/nitro.svg" alt="Nitro" />
+      <img src="icons/boost.svg" alt="Boost" />
+    </div>
+
+    <div class="socials">
+      <a href="https://discord.com/users/1355225924018245796" target="_blank"><img src="icons/discord.svg" alt="Discord" /></a>
+      <a href="https://tiktok.com/@seuuser" target="_blank"><img src="icons/tiktok.svg" alt="TikTok" /></a>
+      <a href="https://instagram.com/seuuser" target="_blank"><img src="icons/instagram.svg" alt="Instagram" /></a>
+    </div>
+  </div>
+
   <script src="script.js"></script>
 </body>
 </html>
