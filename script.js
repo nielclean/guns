@@ -1,32 +1,45 @@
-document.addEventListener('DOMContentLoaded', () => {
-  const userId = '1355225924018245796';
-  const card = document.getElementById('card');
+// Estrelas animadas
+const canvas = document.getElementById("stars");
+const ctx = canvas.getContext("2d");
+let stars = [];
 
-  // Discord Info
-  fetch(`https://api.lanyard.rest/v1/users/${userId}`)
-    .then(res => res.json())
-    .then(({ data }) => {
-      const { username } = data.discord_user;
-      const avatarURL = `https://cdn.discordapp.com/avatars/${userId}/${data.discord_user.avatar}.png?size=512`;
-      document.getElementById('username').textContent = `@${username}`;
-      document.getElementById('status').textContent =
-        data.discord_status === 'online' ? '🟢 Online' : `⚫ ${data.discord_status}`;
-      document.getElementById('avatar').src = avatarURL;
-    });
+function resizeCanvas() {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+}
+resizeCanvas();
+window.addEventListener("resize", resizeCanvas);
 
-  // View Counter
-  let views = localStorage.getItem('guns_views');
-  views = views ? parseInt(views) + 1 : 1;
-  localStorage.setItem('guns_views', views);
-  document.getElementById('viewCount').textContent = views;
-
-  // Parallax Effect
-  document.addEventListener('mousemove', (e) => {
-    const x = (window.innerWidth / 2 - e.pageX) / 40;
-    const y = (window.innerHeight / 2 - e.pageY) / 40;
-    card.style.transform = `translate(-50%, -50%) rotateY(${x}deg) rotateX(${y}deg)`;
+for (let i = 0; i < 100; i++) {
+  stars.push({
+    x: Math.random() * canvas.width,
+    y: Math.random() * canvas.height,
+    r: Math.random() * 1.5,
+    dx: (Math.random() - 0.5) * 0.2,
+    dy: (Math.random() - 0.5) * 0.2
   });
+}
 
-  // Load particles
-  particlesJS.load('particles-js', 'particles.json');
-});
+function drawStars() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  ctx.fillStyle = "white";
+  stars.forEach(star => {
+    ctx.beginPath();
+    ctx.arc(star.x, star.y, star.r, 0, Math.PI * 2);
+    ctx.fill();
+    star.x += star.dx;
+    star.y += star.dy;
+
+    // Rebote nas bordas
+    if (star.x < 0 || star.x > canvas.width) star.dx *= -1;
+    if (star.y < 0 || star.y > canvas.height) star.dy *= -1;
+  });
+  requestAnimationFrame(drawStars);
+}
+drawStars();
+
+// Contador de views
+let views = localStorage.getItem("views");
+views = views ? parseInt(views) + 1 : 1;
+localStorage.setItem("views", views);
+document.getElementById("viewCount").textContent = views;
